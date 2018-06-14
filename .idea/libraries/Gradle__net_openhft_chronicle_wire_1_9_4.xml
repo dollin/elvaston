@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: net.openhft:chronicle-wire:1.9.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.openhft/chronicle-wire/1.9.4/bf387abcc93421578440158c50e83b4769cd9edb/chronicle-wire-1.9.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.openhft/chronicle-wire/1.9.4/faa12c5a5e32b2ed3bbe90fd8710b1d6ef68f168/chronicle-wire-1.9.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

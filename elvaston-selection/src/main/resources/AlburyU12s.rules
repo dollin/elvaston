@@ -1,0 +1,52 @@
+#EAGLES
+A,100,1,1,A,2 x Top w/ Eagles
+A,102,1,2,A,Top OK w/ Eagles
+A,120,2,1,A,OK Top w/ Eagles
+A,130,2,2,A,2 x OK w/ Eagles
+A,140, ,1,A,Missed this week w/ Eagles. Previously Top
+A,140,1, ,A,Top w/ Eagles. Missed previous week
+A,150,2,3,A,OK Poor w/ Eagles
+A,160,3,2,A,Poor OK w/ Eagles
+A,212, ,2,A,Missed this week w/ Eagles. Previously OK
+A,212,2, ,A,OK w/ Eagles. Missed previous week
+
+#LIONS Up
+A,125,1,1,B,2 x Top w/ Lions
+A,170,1,2,B,Top OK w/ Lions
+
+# EAGLES Down
+B,214,3, ,A,Poor w/ Eagles. Missed previous week
+B,216, ,3,A,Missed this week w/ Eagles. Previously Poor
+B,300, , ,A,Missed 2 weeks w/ Eagles
+B,335,3,3,A,2 x Poor w/ Eagles
+
+
+#LIONS
+B,310,1, ,B,Top w/ Lions. Missed previous week
+B,312, ,1,B,Missed this week w/ Lions. Previously Top
+B,320,2,1,B,OK Top w/ Lions
+B,320,1,2,B,Top OK w/ Lions
+B,322,1,3,B,Top Poor w/ Lions
+B,330,2,2,B,2 x OK w/ Lions
+B,340,2,3,B,OK Poor w/ Lions
+B,342,3,2,B,Poor OK w/ Lions
+B,712,2, ,B,OK w/ Lions. Missed previous week
+B,714, ,2,B,Missed this week w/ Lions. Previously OK
+C,716,3, ,B,Poor w/ Lions. Missed previous week
+C,718, ,3,B,Missed this week w/ Lions. Previously Poor
+
+#GRIFFINS Up
+B,370,1,2,C,Top OK w/ Griffins
+
+#LIONS Down
+C,850,3,3,B,2 x Poor w/ Lions
+C,860, , ,B,Missed 2 weeks w/ Lions
+
+#GRIFFINS
+C,800,2,2,C,OK OK w/ Griffins
+C,800,2, ,C,OK w/ Griffins. Missed previous week
+C,802, ,2,C,Missed this week w/ Griffins. Previously OK
+C,800,2,3,C,OK Poor w/ Griffins
+C,800,1, ,C,Top w/ Griffins. Missed previous week
+C,800,2, ,C,OK w/ Griffins. Missed previous week
+C,804, , ,C,Missed 2 weeks w/ Griffins

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-aeron/elvaston-aeron.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-aeron/elvaston-aeron.iml" group="elvaston-aeron" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-aeron/elvaston-aeron_main.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-aeron/elvaston-aeron_main.iml" group="elvaston-aeron" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-aeron/elvaston-aeron_test.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-aeron/elvaston-aeron_test.iml" group="elvaston-aeron" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-euler/elvaston-euler.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-euler/elvaston-euler.iml" group="elvaston-euler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-euler/elvaston-euler_main.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-euler/elvaston-euler_main.iml" group="elvaston-euler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-euler/elvaston-euler_test.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-euler/elvaston-euler_test.iml" group="elvaston-euler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection.iml" group="elvaston-selection" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection_main.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection_main.iml" group="elvaston-selection" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection_test.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection_test.iml" group="elvaston-selection" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston_main.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston_main.iml" group="elvaston" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston_test.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston_test.iml" group="elvaston" />
+    </modules>
+  </component>
+</project>

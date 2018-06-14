@@ -1,0 +1,101 @@
+group 'org.elvaston.apps'
+version 'trunk-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+ext.gradleScriptDir = file('gradle')
+
+ext {
+    junitVersion = '4.12'
+    slf4jVersion = '1.7.4'
+    logbackVersion = '1.2.3'
+    log4j2Version = '2.8.2'
+    mapstructVersion = '1.1.0.Final'
+  //  mockitoVersion = '2.8.+'
+    mockitoVersion = '2.8.47'
+    aeronVersion = '1.3.0'
+    agronaVersion = '0.9.6'
+    chronicleVersion = '1.9.4'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'findbugs'
+    apply from: "$gradleScriptDir/coverage.gradle"
+    apply from: "$gradleScriptDir/checkstyle.gradle"
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        maven {
+            url "http://sevntu-checkstyle.github.com/sevntu.checkstyle/maven2"
+        }
+        jcenter()
+    }
+
+    jacoco {
+        toolVersion = '0.7.8'
+    }
+
+    dependencies {
+        compile "org.apache.logging.log4j:log4j-api:$log4j2Version"
+        compile "org.apache.logging.log4j:log4j-core:$log4j2Version"
+        compile "org.apache.logging.log4j:log4j-slf4j-impl:$log4j2Version"
+    }
+
+    tasks.withType(FindBugs) {
+        reports {
+            xml.enabled=false
+            html.enabled=true
+        }
+    }
+
+    dependencies {
+        checkstyle 'com.puppycrawl.tools:checkstyle:7.7'
+        checkstyle 'com.github.sevntu.checkstyle:sevntu-checks:1.23.1'
+
+        testCompile("junit:junit:4.11")
+    }
+}
+
+project("elvaston-aeron") {
+    description = "Elvaston Aeron Module"
+
+    dependencies {
+        compile "io.aeron:aeron-all:$aeronVersion"
+        compile "org.agrona:agrona:$agronaVersion"
+        compile "net.openhft:chronicle-wire:$chronicleVersion"
+        testCompile "org.mockito:mockito-core:$mockitoVersion"
+    }
+
+    ext {
+        limits = [
+                'instruction': 5,
+                'branch': 5,
+                'line': 5,
+                'complexity': 5,
+                'method': 5,
+                'class': 5
+        ]
+    }
+}
+
+project("elvaston-euler") {
+    description = "Elvaston euler Module"
+}
+
+project("elvaston-selection") {
+    description = "Albury U12 Selection Module"
+    ext {
+        limits = [
+                'instruction': 5,
+                'branch': 5,
+                'line': 5,
+                'complexity': 5,
+                'method': 5,
+                'class': 5
+        ]
+    }
+}
