@@ -1,6 +1,5 @@
 package org.elvaston.aeron.publisher;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.agrona.BufferUtil.allocateDirectAligned;
 
 import io.aeron.Aeron;
@@ -18,7 +17,6 @@ import org.elvaston.aeron.common.AeronMessage;
 import org.elvaston.aeron.exception.AeronErrorCode;
 
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.util.List;
 
 /**
@@ -30,8 +28,8 @@ public class AeronPublisherImpl<T> {
     private static final Logger LOG = LogManager.getLogger(AeronPublisherImpl.class);
 
     private static int bufferLength = 256;
-
-    private static final UnsafeBuffer publisherBuffer = new UnsafeBuffer(allocateDirectAligned(bufferLength, BitUtil.CACHE_LINE_LENGTH));
+    private static final ByteBuffer buffer = allocateDirectAligned(bufferLength, BitUtil.CACHE_LINE_LENGTH);
+    private static final UnsafeBuffer publisherBuffer = new UnsafeBuffer(buffer);
 
     private final MediaDriver driver;
     private final Aeron aeron;

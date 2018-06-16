@@ -9,7 +9,6 @@ import io.aeron.FragmentAssembler;
 import io.aeron.Subscription;
 import io.aeron.driver.MediaDriver;
 import io.aeron.logbuffer.FragmentHandler;
-import io.aeron.samples.SamplesUtil;
 import org.agrona.CloseHelper;
 import org.agrona.LangUtil;
 import org.agrona.concurrent.BusySpinIdleStrategy;
@@ -22,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
@@ -144,7 +142,7 @@ public class AeronSubscriberImpl<T> {
 //        Subscription subscription = image.subscription();
 //        LOG.info("Unavailable image on {} streamId={} sessionId={}",
 //                subscription.channel(),
-//                subscription.streamId(),
+//                   subscription.streamId(),
 //                image.sessionId());
 //    };
 

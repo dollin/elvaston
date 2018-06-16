@@ -1,6 +1,5 @@
 package org.elvaston.aeron.publisher;
 
-import static io.aeron.samples.AeronStat.mapCounters;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -10,12 +9,12 @@ import org.elvaston.aeron.driver.AeronMediaDriverBuilder;
 import org.junit.Test;
 
 /**
- * TODO Add javadoc.
+ * Test class for AeronPublisherImpl.
  */
 public class AeronPublisherImplTest {
 
     @Test
-    public void publishOffersButFailsWhenNoSubscribers() throws Exception {
+    public void publishOffersButFailsWhenNoSubscribers() {
         MediaDriver mediaDriver = new AeronMediaDriverBuilder().withEmbedded().launch();
         AeronPublisherImpl<String> aeronPublisher = new AeronPublisherBuilder<String>()
                 .withDriver(mediaDriver)

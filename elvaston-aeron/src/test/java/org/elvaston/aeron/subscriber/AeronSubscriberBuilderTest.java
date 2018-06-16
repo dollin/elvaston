@@ -3,16 +3,15 @@ package org.elvaston.aeron.subscriber;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+
 import io.aeron.Aeron;
 import io.aeron.driver.MediaDriver;
 import org.elvaston.aeron.driver.AeronMediaDriverBuilder;
 import org.elvaston.aeron.exception.AeronException;
 import org.junit.Test;
 
-import java.io.IOException;
-
 /**
- * Test class for the Subscriber builder.
+ * Test class for AeronSubscriberBuilder.
  */
 public class AeronSubscriberBuilderTest {
 
@@ -62,7 +61,7 @@ public class AeronSubscriberBuilderTest {
     }
 
     @Test
-    public void createSubscriberWithAeron() throws IOException {
+    public void createSubscriberWithAeron() {
         MediaDriver mediaDriver = new AeronMediaDriverBuilder().withEmbedded().launch();
         Aeron aeron = Aeron.connect(new Aeron.Context().aeronDirectoryName(mediaDriver.aeronDirectoryName()));
 
@@ -97,7 +96,7 @@ public class AeronSubscriberBuilderTest {
                 .connect();
         assertNotNull(aeronSubscriber);
         assertEquals(1, aeronSubscriber.streamCount());
-        }
+    }
 
     @Test
     public void createDefaultSubscriberWithMultipleStreams() {

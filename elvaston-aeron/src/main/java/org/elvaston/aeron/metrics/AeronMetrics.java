@@ -64,6 +64,10 @@ public class AeronMetrics {
         return metrics.stream();
     }
 
+    /**
+     * Prints the metrics to a given stream.
+     * @param out stream to print to
+     */
     public void print(PrintStream out) {
         metrics().sorted().forEach((aeronMetric) -> out.format("%3d: %,20d - %s%n",
                         aeronMetric.key(),
