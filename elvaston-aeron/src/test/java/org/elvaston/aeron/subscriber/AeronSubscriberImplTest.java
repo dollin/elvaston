@@ -17,6 +17,7 @@ import org.junit.Test;
 public class AeronSubscriberImplTest {
 
     private static final String UDP_CHANNEL = "aeron:udp?endpoint=localhost:40124";
+
     @Test
     public void simpleSubscriptionWithString() {
         MediaDriver mediaDriver = new AeronMediaDriverBuilder().withEmbedded().launch();
