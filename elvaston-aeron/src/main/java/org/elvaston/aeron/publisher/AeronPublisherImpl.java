@@ -86,7 +86,7 @@ public class AeronPublisherImpl<T> {
 
   //      publisherBuffer.putBytes(0, messageBytes);
         int stream = (int) (Math.random() * 1_000 % streamCount());
-        LOG.info("Offer to streamId: {}, length: {}, msg: {}", stream, length, message);
+        LOG.info("Message sent - stream: {}, length: {}, msg: {}", stream, length, message);
 
         long result = publications.get(stream).offer(publisherBuffer, 0, length);
         logResult(publications.get(stream).isConnected(), stream, result);

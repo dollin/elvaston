@@ -35,19 +35,23 @@ public class AeronSubscriberImplTest {
         assertNotNull(aeronSubscriber);
 
         AeronMetrics aeronMetrics = new AeronMetrics(mediaDriver.aeronDirectoryName());
-        aeronMetrics.print(System.out);
+        aeronMetrics.log();
 
         aeronPublisher.publish(new AeronMessage<String>().withPayload("NEIL"));
         aeronPublisher.publish(new AeronMessage<String>().withPayload("STEVE is a nightmare"));
-//        aeronPublisher.publish(new AeronMessage<String>().withPayload("NEIL1"));
-//        aeronPublisher.publish(new AeronMessage<String>().withPayload("NEIL"));
-//        aeronPublisher.publish(new AeronMessage<String>().withPayload("NEIL"));
-//        aeronPublisher.publish(new AeronMessage<String>().withPayload("NEIL"));
-//        aeronPublisher.publish(new AeronMessage<String>().withPayload("NEIL"));
+        aeronPublisher.publish(new AeronMessage<String>().withPayload("NEIL1"));
+        aeronPublisher.publish(new AeronMessage<String>().withPayload("NEIL"));
+        aeronPublisher.publish(new AeronMessage<String>().withPayload("NEIL"));
+        aeronPublisher.publish(new AeronMessage<String>().withPayload("NEIL"));
+//            aeronPublisher.publish(new AeronMessage<String>().withPayload("NEIL"));
 
-        aeronMetrics.print(System.out);
-//TODO replace with bytes sent
-        assertEquals(1, aeronMetrics.channelSent());
-        assertEquals(1, aeronMetrics.channelReceived());
+        aeronMetrics.log();
+        //TODO replace with bytes sent
+        assertEquals(1, aeronMetrics.sndChannel());
+        assertEquals(1, aeronMetrics.rcvChannel());
+
+        assertEquals(aeronMetrics.bytesSent(), aeronMetrics.bytesReceived());
+
+        aeronMetrics.log();
     }
 }

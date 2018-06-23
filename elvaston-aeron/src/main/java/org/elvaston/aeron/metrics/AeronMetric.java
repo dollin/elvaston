@@ -1,6 +1,6 @@
 package org.elvaston.aeron.metrics;
 
-import static org.elvaston.aeron.metrics.AeronKey.NULL;
+import static org.elvaston.aeron.metrics.AeronMetricKey.NULL;
 
 import org.jetbrains.annotations.NotNull;
 

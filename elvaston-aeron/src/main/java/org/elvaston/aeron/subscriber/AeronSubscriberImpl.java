@@ -17,7 +17,6 @@ import org.agrona.concurrent.SigInt;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -32,7 +31,7 @@ public class AeronSubscriberImpl<T> {
 
     private MediaDriver driver;
     private Aeron aeron;
-    private List<Subscription> subscriptions = new ArrayList<>();
+    private List<Subscription> subscriptions;
 
     AeronSubscriberImpl(MediaDriver driver, Aeron aeron, List<Subscription> subscriptions) {
         this.driver = driver;
@@ -122,7 +121,7 @@ public class AeronSubscriberImpl<T> {
     private static final FragmentHandler FRAGMENT = (buffer, offset, length, header) -> {
         byte[] data = new byte[length];
         buffer.getBytes(offset, data);
-        LOG.info("Message on stream {} [length:{}, offset:{}, data: {}]",
+        LOG.info("Message received  - stream: {} length:{}, offset:{}, data: {}",
                 header.streamId(),
                 length,
                 offset,
