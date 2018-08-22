@@ -72,10 +72,10 @@ project("elvaston-aeron") {
 
     ext {
         limits = [
-                'instruction': 5,
+                'instruction': 75,
                 'branch': 5,
                 'line': 5,
-                'complexity': 5,
+                'complexity': 75,
                 'method': 5,
                 'class': 5
         ]
