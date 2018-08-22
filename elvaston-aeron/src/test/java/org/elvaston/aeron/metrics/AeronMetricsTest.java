@@ -11,7 +11,7 @@ public class AeronMetricsTest {
     @Test
     public void printMetrics() {
         AeronMetrics aeronMetrics = new AeronMetrics();
-        aeronMetrics.print(System.out);
+        aeronMetrics.log();
 
         aeronMetrics.metrics().forEach(am -> System.out.println(am.toString()));
     }

@@ -1,9 +1,11 @@
 package org.elvaston.aeron.metrics;
 
-import static org.elvaston.aeron.metrics.AeronKey.NULL;
+import static org.elvaston.aeron.metrics.AeronMetricKey.NULL;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
- * TODO Add javadoc.
+ * Pojo for the AeronMetrics.
  */
 public class AeronMetric implements Comparable<AeronMetric> {
     public static final AeronMetric NULL_METRIC = new AeronMetric(NULL.key(), "null", -1L);
@@ -36,7 +38,30 @@ public class AeronMetric implements Comparable<AeronMetric> {
     }
 
     @Override
-    public int compareTo(AeronMetric that) {
+    public int compareTo(@NotNull AeronMetric that) {
+        if (this.equals(that)) {
+            return 0;
+        }
+
         return this.key() - that.key();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        AeronMetric that = (AeronMetric) obj;
+
+        return key == that.key;
+    }
+
+    @Override
+    public int hashCode() {
+        return key;
     }
 }
