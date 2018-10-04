@@ -1,7 +1,7 @@
 ## Kafka Help Starting the Infrastructure: -
 This is a quick startup helper taken from [kafka.apache.org](https://kafka.apache.org/quickstart)
 
-1. First, from the kafka install directory C:\Users\elvastooon5\kafka_2.11-2.0.0
+1. First, from the kafka install directory, for me this is at: C:\Users\elvastooon5\kafka_2.11-2.0.0
 
 2. Start ZOOKEEPER
 ```bash
