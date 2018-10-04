@@ -1,7 +1,5 @@
 package org.elvaston.kafka.common;
 
-import org.apache.kafka.common.serialization.ByteArrayDeserializer;
-import org.apache.kafka.common.serialization.ByteArraySerializer;
 import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.LongSerializer;
 
@@ -19,7 +17,7 @@ public class KafkaProperties {
     public static final String OFFSET_RESET_EARLIER = "earliest";
     public static final Integer MAX_POLL_RECORDS = 1;
     public static final String KEY_DESERIALIZER = LongDeserializer.class.getName();
-    public static final String VALUE_DESERIALIZER = ByteArrayDeserializer.class.getName();
+    public static final String VALUE_DESERIALIZER = KafkaPayloadSerialization.class.getName();
     public static final String KEY_SERIALIZER = LongSerializer.class.getName();
-    public static final String VALUE_SERIALIZER = ByteArraySerializer.class.getName();
+    public static final String VALUE_SERIALIZER = KafkaPayloadSerialization.class.getName();
 }

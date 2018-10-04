@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class KafkaMetrics implements Runnable {
     private static final Logger LOG = LoggerFactory.getLogger(KafkaMetrics.class);
 
-    protected volatile boolean running = true;
+    private volatile boolean running = true;
 
     protected abstract Map<MetricName, ? extends Metric> metrics();
 
