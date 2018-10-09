@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/elvaston-aeron" />
             <option value="$PROJECT_DIR$/elvaston-euler" />
+            <option value="$PROJECT_DIR$/elvaston-kafka" />
             <option value="$PROJECT_DIR$/elvaston-selection" />
           </set>
         </option>

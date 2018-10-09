@@ -10,6 +10,7 @@ import org.elvaston.kafka.api.KafkaProducer;
 import org.elvaston.kafka.common.KafkaCallback;
 import org.elvaston.kafka.common.KafkaMetrics;
 import org.elvaston.kafka.common.KafkaPayload;
+import org.elvaston.kafka.common.KafkaUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,11 +66,7 @@ public class KafkaProducerImpl implements KafkaProducer<Long, KafkaPayload> {
             LOG.info("Sending record: [key: {}, topic: {}]", record.key(), record.topic());
             producer.send(record, new KafkaCallback<>(record, this::onError, this::onSuccess));
         }
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        KafkaUtils.sleep(TimeUnit.SECONDS, 10);
     }
 
     private void onSuccess(ProducerRecord<Long, KafkaPayload> payload, RecordMetadata metadata) {

@@ -30,13 +30,14 @@ public abstract class KafkaMetrics implements Runnable {
     @Override
     public void run() {
         while (running) {
-            LOG.info("polling {} metrics: {}", type(), metrics());
-            try {
-                TimeUnit.SECONDS.sleep(10);
-            } catch (InterruptedException e) {
-                Thread.interrupted();
-            }
+            logMetrics();
+            KafkaUtils.sleep(TimeUnit.SECONDS, 10);
         }
-        LOG.info("shutdown {} metrics: {}", type(), metrics());
+        logMetrics();
+    }
+
+    private void logMetrics() {
+        metrics().forEach((metricName, metric) ->
+                LOG.info("{} metric name: {} value: {}", type(), metricName.name(), metric.metricValue()));
     }
 }
