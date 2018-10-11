@@ -12,13 +12,13 @@ import java.util.Properties;
 /**
  * Builder class to help create a KafkaProducer.
  */
-public class KafkaProducerBuilder<K, V> {
+public class KafkaProducerContext<K, V> {
 
     /**
      * Creates a Producer using the ProducerConfig and KafkaProperties.
      * @return Producer
      */
-    public Producer<K, V> build() {
+    public Producer<K, V> producer() {
         Properties props = new Properties();
 
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaProperties.KAFKA_BROKERS);

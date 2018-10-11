@@ -2,9 +2,9 @@ package org.elvaston.kafka.consumer;
 
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.producer.RecordMetadata;
 import org.elvaston.kafka.api.KafkaConsumer;
 import org.elvaston.kafka.common.KafkaMetrics;
+import org.elvaston.kafka.common.KafkaPayload;
 import org.elvaston.kafka.common.KafkaProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,20 +12,17 @@ import org.slf4j.LoggerFactory;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * KafkaProducer to send the serialized KafkaPayload messages to our test topic.
  */
-public class KafkaConsumerImpl implements KafkaConsumer {
+public class KafkaConsumerImpl implements KafkaConsumer<Long, KafkaPayload> {
 
     private static final Logger LOG = LoggerFactory.getLogger(KafkaConsumerImpl.class);
 
-    private final ExecutorService executorService = Executors.newCachedThreadPool();
-    private final LinkedBlockingQueue<Future<RecordMetadata>> queue = new LinkedBlockingQueue<>();
-    private volatile boolean continueProcessing = true;
+    private final ExecutorService kafkaMetricsService = Executors.newCachedThreadPool();
     private KafkaMetrics kafkaMetrics;
+    private volatile boolean running;
 
     /**
      * Main entry to the ConsumerImpl.
@@ -33,33 +30,33 @@ public class KafkaConsumerImpl implements KafkaConsumer {
      */
     public static void main(String[] args) {
         KafkaConsumerImpl kafkaConsumer = new KafkaConsumerImpl();
-        kafkaConsumer.start(new KafkaConsumerBuilder<>());
+        kafkaConsumer.start(new KafkaConsumerContext<>());
         kafkaConsumer.stop();
     }
 
     @Override
-    public void start(KafkaConsumerBuilder builder) {
-        consumeMessages(builder);
+    public void start(KafkaConsumerContext<Long, KafkaPayload> context) {
+        consumeMessages(context);
     }
 
     @Override
     public void stop() {
-        continueProcessing = false;
+        running = false;
         if (Objects.nonNull(kafkaMetrics)) {
             kafkaMetrics.stop();
         }
-        executorService.shutdownNow();
+        kafkaMetricsService.shutdownNow();
     }
 
-    private void consumeMessages(KafkaConsumerBuilder<Long, byte[]> builder) {
-        Consumer<Long, byte[]> producer = builder.build();
-        kafkaMetrics = builder.withMetrics(producer);
-        executorService.execute(kafkaMetrics);
+    private void consumeMessages(KafkaConsumerContext<Long, KafkaPayload> context) {
+        Consumer<Long, KafkaPayload> producer = context.consumer();
+        kafkaMetrics = context.withMetrics(producer);
 
         int noMessageFound = 0;
         
-        while (true) {
-            ConsumerRecords<Long, byte[]> consumerRecords = producer.poll(1000);
+        while (running) {
+
+            ConsumerRecords<Long, KafkaPayload> consumerRecords = producer.poll(context.duration());
 
             // 1000 is the time in milliseconds consumer will wait if no record is found at broker.
 

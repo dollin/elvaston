@@ -6,19 +6,22 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.elvaston.kafka.common.KafkaMetrics;
 import org.elvaston.kafka.common.KafkaProperties;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
 /**
  * Builder class to help create a KafkaConsumer.
  */
-public class KafkaConsumerBuilder<K, V> {
+public class KafkaConsumerContext<K, V> {
+
+    private static final long ONE = 1L;
 
     /**
      * Creates a Consumer using the ConsumerConfig and KafkaProperties.
      * @return Consumer
      */
-    public Consumer<K, V> build() {
+    public Consumer<K, V> consumer() {
 
         Properties props = new Properties();
 
@@ -38,5 +41,9 @@ public class KafkaConsumerBuilder<K, V> {
 
     public KafkaMetrics withMetrics(Consumer<K, V> consumer) {
         return new KafkaConsumerMetrics<>(consumer);
+    }
+
+    public Duration duration() {
+        return Duration.ofSeconds(ONE);
     }
 }

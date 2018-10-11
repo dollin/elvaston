@@ -1,6 +1,6 @@
 package org.elvaston.kafka.api;
 
-import org.elvaston.kafka.producer.KafkaProducerBuilder;
+import org.elvaston.kafka.producer.KafkaProducerContext;
 
 /**
  * Interface for our service to produce messages to Kafka.
@@ -13,11 +13,11 @@ public interface KafkaProducer<K, V> {
     void start();
 
     /**
-     * Start the KafkaProducer w/ provided builder and count.
-     * @param builder to use to create the Producer
+     * Start the KafkaProducer w/ provided context and count.
+     * @param context to use to create the Producer
      * @param count number of messages to send
      */
-    void start(KafkaProducerBuilder<K, V> builder, int count);
+    void start(KafkaProducerContext<K, V> context, int count);
 
     /**
      * Stops the KafkaProducer.

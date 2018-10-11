@@ -7,7 +7,8 @@ import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.elvaston.kafka.api.KafkaProducer;
-import org.elvaston.kafka.common.KafkaCallback;
+import org.elvaston.kafka.common.KafkaCallbackDetails;
+import org.elvaston.kafka.common.KafkaCallbackImpl;
 import org.elvaston.kafka.common.KafkaMetrics;
 import org.elvaston.kafka.common.KafkaPayload;
 import org.elvaston.kafka.common.KafkaUtils;
@@ -40,12 +41,12 @@ public class KafkaProducerImpl implements KafkaProducer<Long, KafkaPayload> {
 
     @Override
     public void start() {
-        start(new KafkaProducerBuilder<>(), MESSAGE_COUNT);
+        start(new KafkaProducerContext<>(), MESSAGE_COUNT);
     }
 
     @Override
-    public void start(KafkaProducerBuilder<Long, KafkaPayload> builder, int count) {
-        processMessages(builder, count);
+    public void start(KafkaProducerContext<Long, KafkaPayload> context, int count) {
+        processMessages(context, count);
     }
 
     @Override
@@ -54,9 +55,9 @@ public class KafkaProducerImpl implements KafkaProducer<Long, KafkaPayload> {
         executorService.shutdownNow();
     }
 
-    private void processMessages(KafkaProducerBuilder<Long, KafkaPayload> builder, long msgCount) {
-        Producer<Long, KafkaPayload> producer = builder.build();
-        kafkaMetrics = builder.withMetrics(producer);
+    private void processMessages(KafkaProducerContext<Long, KafkaPayload> context, long msgCount) {
+        Producer<Long, KafkaPayload> producer = context.producer();
+        kafkaMetrics = context.withMetrics(producer);
         executorService.execute(kafkaMetrics);
 
         for (long index = 0; index < msgCount; index++) {
@@ -64,21 +65,29 @@ public class KafkaProducerImpl implements KafkaProducer<Long, KafkaPayload> {
 
             ProducerRecord<Long, KafkaPayload> record = new ProducerRecord<>(TOPIC_NAME, index, payload);
             LOG.info("Sending record: [key: {}, topic: {}]", record.key(), record.topic());
-            producer.send(record, new KafkaCallback<>(record, this::onError, this::onSuccess));
+            producer.send(record, new KafkaCallbackImpl<>(record, this::onError, this::onSuccess));
         }
         KafkaUtils.sleep(TimeUnit.SECONDS, 10);
     }
 
-    private void onSuccess(ProducerRecord<Long, KafkaPayload> payload, RecordMetadata metadata) {
+    private void onSuccess(KafkaCallbackDetails<Long, KafkaPayload> callback) {
         LOG.info("Record key: {}, topic: {}, partition: {}, offset: {}, keySize: {}, valueSize: {}",
-                payload.key(),
+                callback.key(),
+                callback.topic(),
+                callback.partition(),
+                callback.offset(),
+                callback.serializedKeySize(),
+                callback.serializedValueSize());
+    }
+
+    private void onError(RecordMetadata metadata, Exception exception) {
+        //TODO: RETRY???? so will need to
+        LOG.warn("Exception w/ topic: {}, partition: {}, offset: {}, keySize: {}, valueSize: {}",
                 metadata.topic(),
                 metadata.partition(),
                 metadata.offset(),
                 metadata.serializedKeySize(),
-                metadata.serializedValueSize());
-    }
-
-    private void onError(RecordMetadata metadata, Exception exception) {
+                metadata.serializedValueSize(),
+                exception);
     }
 }
