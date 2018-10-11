@@ -12,6 +12,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-kafka/elvaston-kafka.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-kafka/elvaston-kafka.iml" group="elvaston-kafka" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-kafka/elvaston-kafka_main.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-kafka/elvaston-kafka_main.iml" group="elvaston-kafka" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-kafka/elvaston-kafka_test.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-kafka/elvaston-kafka_test.iml" group="elvaston-kafka" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-model/elvaston-model.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-model/elvaston-model.iml" group="elvaston-model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-model/elvaston-model_main.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-model/elvaston-model_main.iml" group="elvaston-model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-model/elvaston-model_test.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-model/elvaston-model_test.iml" group="elvaston-model" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection.iml" group="elvaston-selection" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection_main.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection_main.iml" group="elvaston-selection" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection_test.iml" filepath="$PROJECT_DIR$/.idea/modules/elvaston-selection/elvaston-selection_test.iml" group="elvaston-selection" />

@@ -16,6 +16,8 @@
       <module name="elvaston-incubating_test" target="1.8" />
       <module name="elvaston-kafka_main" target="1.8" />
       <module name="elvaston-kafka_test" target="1.8" />
+      <module name="elvaston-model_main" target="1.8" />
+      <module name="elvaston-model_test" target="1.8" />
       <module name="elvaston-quinx_main" target="1.8" />
       <module name="elvaston-quinx_test" target="1.8" />
       <module name="elvaston-selection_main" target="1.8" />

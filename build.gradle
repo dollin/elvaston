@@ -67,7 +67,23 @@ project("elvaston-kafka") {
     dependencies {
         compile "org.apache.kafka:kafka-clients:$kafkaVersion"
         compile "org.apache.commons:commons-lang3:$commonsVersion"
+        compile project(":elvaston-model")
     }
+    ext {
+        limits = [
+                'instruction': 0,
+                'branch': 0,
+                'line': 0,
+                'complexity': 0,
+                'method': 0,
+                'class': 0
+        ]
+    }
+}
+
+project("elvaston-model") {
+    description = "Elvaston Model Module"
+
     ext {
         limits = [
                 'instruction': 0,
@@ -108,6 +124,7 @@ project("elvaston-euler") {
 
 project("elvaston-selection") {
     description = "Albury U12 Selection Module"
+
     ext {
         limits = [
                 'instruction': 5,
