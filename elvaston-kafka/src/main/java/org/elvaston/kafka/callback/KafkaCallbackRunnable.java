@@ -1,4 +1,4 @@
-package org.elvaston.kafka.common;
+package org.elvaston.kafka.callback;
 
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
@@ -12,15 +12,15 @@ import java.util.concurrent.TimeUnit;
 /**
  * Callback to read futures from a KafkaService and log the details.
  */
-public class KafkaRunnableCallback implements Runnable {
+public class KafkaCallbackRunnable implements Runnable {
 
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaRunnableCallback.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KafkaCallbackRunnable.class);
 
     private final LinkedBlockingQueue<Future<RecordMetadata>> callBackQueue;
     private final String serviceType;
     private volatile boolean running = true;
 
-    public KafkaRunnableCallback(LinkedBlockingQueue<Future<RecordMetadata>> queue, String serviceType) {
+    public KafkaCallbackRunnable(LinkedBlockingQueue<Future<RecordMetadata>> queue, String serviceType) {
         this.callBackQueue = queue;
         this.serviceType = serviceType;
     }

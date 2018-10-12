@@ -7,11 +7,11 @@ import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.elvaston.kafka.api.KafkaProducer;
-import org.elvaston.kafka.common.KafkaCallbackDetails;
-import org.elvaston.kafka.common.KafkaCallbackImpl;
-import org.elvaston.kafka.common.KafkaMetrics;
+import org.elvaston.kafka.callback.KafkaCallbackDetails;
+import org.elvaston.kafka.callback.KafkaCallbackImpl;
 import org.elvaston.kafka.common.KafkaPayload;
 import org.elvaston.kafka.common.KafkaUtils;
+import org.elvaston.kafka.metrics.KafkaMetrics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

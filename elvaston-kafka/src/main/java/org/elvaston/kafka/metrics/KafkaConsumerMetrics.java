@@ -1,9 +1,8 @@
-package org.elvaston.kafka.consumer;
+package org.elvaston.kafka.metrics;
 
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.common.Metric;
 import org.apache.kafka.common.MetricName;
-import org.elvaston.kafka.common.KafkaMetrics;
 
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class KafkaConsumerMetrics<K, V> extends KafkaMetrics {
 
     private final Consumer<K, V> consumer;
 
-    KafkaConsumerMetrics(Consumer<K, V> consumer) {
+    public KafkaConsumerMetrics(Consumer<K, V> consumer) {
         this.consumer = consumer;
     }
 

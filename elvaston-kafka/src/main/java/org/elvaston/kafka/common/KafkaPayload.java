@@ -5,7 +5,7 @@ import org.elvaston.model.api.Transaction;
 import java.io.Serializable;
 
 /**
- * TODO Add javadoc.
+ * {@code Serializable} Payload of the objects we are sending and receiving to Kafka.
  */
 public class KafkaPayload implements Serializable {
     private String name = "dollin";

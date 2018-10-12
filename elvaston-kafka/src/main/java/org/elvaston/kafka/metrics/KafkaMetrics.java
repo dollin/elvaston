@@ -1,7 +1,8 @@
-package org.elvaston.kafka.common;
+package org.elvaston.kafka.metrics;
 
 import org.apache.kafka.common.Metric;
 import org.apache.kafka.common.MetricName;
+import org.elvaston.kafka.common.KafkaUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

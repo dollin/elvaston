@@ -3,8 +3,9 @@ package org.elvaston.kafka.consumer;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.elvaston.kafka.common.KafkaMetrics;
 import org.elvaston.kafka.common.KafkaProperties;
+import org.elvaston.kafka.metrics.KafkaConsumerMetrics;
+import org.elvaston.kafka.metrics.KafkaMetrics;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -15,14 +16,11 @@ import java.util.Properties;
  */
 public class KafkaConsumerContext<K, V> {
 
+    private final Consumer<K, V> consumer;
+
     private static final long ONE = 1L;
 
-    /**
-     * Creates a Consumer using the ConsumerConfig and KafkaProperties.
-     * @return Consumer
-     */
-    public Consumer<K, V> consumer() {
-
+    KafkaConsumerContext() {
         Properties props = new Properties();
 
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaProperties.KAFKA_BROKERS);
@@ -33,9 +31,15 @@ public class KafkaConsumerContext<K, V> {
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, KafkaProperties.OFFSET_RESET_EARLIER);
 
-        Consumer<K, V> consumer = new KafkaConsumer<>(props);
+        consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Collections.singletonList(KafkaProperties.TOPIC_NAME));
+    }
 
+    /**
+     * Creates a Consumer using the ConsumerConfig and KafkaProperties.
+     * @return Consumer
+     */
+    public Consumer<K, V> consumer() {
         return consumer;
     }
 

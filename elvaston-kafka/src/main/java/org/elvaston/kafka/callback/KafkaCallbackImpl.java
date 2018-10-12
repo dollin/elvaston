@@ -1,4 +1,4 @@
-package org.elvaston.kafka.common;
+package org.elvaston.kafka.callback;
 
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -16,9 +16,9 @@ import java.util.function.Consumer;
  */
 public class KafkaCallbackImpl<K, V> implements Callback {
 
-    private ProducerRecord<K, V> record;
-    private BiConsumer<RecordMetadata, Exception> onError;
-    private Consumer<KafkaCallbackDetails<K, V>> onSuccess;
+    private final ProducerRecord<K, V> record;
+    private final BiConsumer<RecordMetadata, Exception> onError;
+    private final Consumer<KafkaCallbackDetails<K, V>> onSuccess;
 
     /**
      * Constructor to create an instance of a Callback.

@@ -6,10 +6,9 @@ import org.apache.kafka.common.Cluster;
 import java.util.Map;
 
 /**
- * TODO Add javadoc.
+ * Default implementation of {@code Partitioner} interface to drive the load balancing onto the Kafka queue.
  */
 public class KafkaPartitionerImpl implements Partitioner {
-    private static final int PARTITION_COUNT = 50;
 
     @Override
     public void configure(Map<String, ?> configs) {
@@ -19,8 +18,7 @@ public class KafkaPartitionerImpl implements Partitioner {
     @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
         Integer keyInt = Integer.parseInt(key.toString());
-        return keyInt % PARTITION_COUNT;
-
+        return keyInt % KafkaProperties.KAFKA_PARTITIONS;
     }
 
     @Override

@@ -3,15 +3,17 @@ package org.elvaston.kafka.consumer;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.elvaston.kafka.api.KafkaConsumer;
-import org.elvaston.kafka.common.KafkaMetrics;
 import org.elvaston.kafka.common.KafkaPayload;
 import org.elvaston.kafka.common.KafkaProperties;
+import org.elvaston.kafka.common.KafkaUtils;
+import org.elvaston.kafka.metrics.KafkaMetrics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * KafkaProducer to send the serialized KafkaPayload messages to our test topic.
@@ -20,9 +22,9 @@ public class KafkaConsumerImpl implements KafkaConsumer<Long, KafkaPayload> {
 
     private static final Logger LOG = LoggerFactory.getLogger(KafkaConsumerImpl.class);
 
-    private final ExecutorService kafkaMetricsService = Executors.newCachedThreadPool();
+    private final ExecutorService kafkaExecutorService = Executors.newCachedThreadPool();
     private KafkaMetrics kafkaMetrics;
-    private volatile boolean running;
+    private volatile boolean running = true;
 
     /**
      * Main entry to the ConsumerImpl.
@@ -31,12 +33,16 @@ public class KafkaConsumerImpl implements KafkaConsumer<Long, KafkaPayload> {
     public static void main(String[] args) {
         KafkaConsumerImpl kafkaConsumer = new KafkaConsumerImpl();
         kafkaConsumer.start(new KafkaConsumerContext<>());
+
+        KafkaUtils.sleep(TimeUnit.SECONDS, 10);
+
         kafkaConsumer.stop();
     }
 
     @Override
     public void start(KafkaConsumerContext<Long, KafkaPayload> context) {
-        consumeMessages(context);
+        startMetrics(context);
+        startConsumer(context);
     }
 
     @Override
@@ -45,51 +51,45 @@ public class KafkaConsumerImpl implements KafkaConsumer<Long, KafkaPayload> {
         if (Objects.nonNull(kafkaMetrics)) {
             kafkaMetrics.stop();
         }
-        kafkaMetricsService.shutdownNow();
+        kafkaExecutorService.shutdownNow();
     }
 
-    private void consumeMessages(KafkaConsumerContext<Long, KafkaPayload> context) {
+    private void startMetrics(KafkaConsumerContext<Long, KafkaPayload> context) {
         Consumer<Long, KafkaPayload> producer = context.consumer();
         kafkaMetrics = context.withMetrics(producer);
+        kafkaExecutorService.submit(kafkaMetrics);
+    }
 
-        int noMessageFound = 0;
-        
-        while (running) {
+    private void startConsumer(final KafkaConsumerContext<Long, KafkaPayload> context) {
 
-            ConsumerRecords<Long, KafkaPayload> consumerRecords = producer.poll(context.duration());
+        final Consumer<Long, KafkaPayload> producer = context.consumer();
 
-            // 1000 is the time in milliseconds consumer will wait if no record is found at broker.
+        kafkaExecutorService.submit(() -> {
+            int emptyMessagesCount = 0;
+            while (running) {
+                ConsumerRecords<Long, KafkaPayload> consumerRecords = producer.poll(context.duration());
 
-            if (consumerRecords.count() == 0) {
+                if (consumerRecords.count() > 0) {
+                    emptyMessagesCount = 0;
+                    consumerRecords.forEach(record -> {
 
-                noMessageFound++;
+                        LOG.info("Record Key " + record.key());
+                        System.out.println("Record value " + record.value());
+                        System.out.println("Record partition " + record.partition());
+                        System.out.println("Record offset " + record.offset());
 
-                if (noMessageFound > KafkaProperties.MAX_NO_MESSAGE_FOUND_COUNT) {
-
-                    // If no message found count is reached to threshold exit loop.
-
-                    break;
-
+                    });
+                    producer.commitAsync();
                 } else {
-
-                    continue;
-
+                    emptyMessagesCount++;
+                    if (emptyMessagesCount > KafkaProperties.CONSUMER_NO_MESSAGE_FOUND_THRESHOLD) {
+                        running = false;
+                    } else {
+                        KafkaUtils.sleep(TimeUnit.MILLISECONDS, KafkaProperties.CONSUMER_POLL_INTERVAL_IN_MS);
+                    }
                 }
             }
-            //print each record.
-
-            consumerRecords.forEach(record -> {
-
-                LOG.info("Record Key " + record.key());
-                System.out.println("Record value " + record.value());
-                System.out.println("Record partition " + record.partition());
-                System.out.println("Record offset " + record.offset());
-
-            });
-
-            // commits the offset of record to broker.
-            producer.commitAsync();
-        }
-        producer.close();
+            producer.close();
+        });
     }
 }

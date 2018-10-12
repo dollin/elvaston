@@ -3,9 +3,10 @@ package org.elvaston.kafka.producer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.elvaston.kafka.common.KafkaMetrics;
 import org.elvaston.kafka.common.KafkaPartitionerImpl;
 import org.elvaston.kafka.common.KafkaProperties;
+import org.elvaston.kafka.metrics.KafkaMetrics;
+import org.elvaston.kafka.metrics.KafkaProducerMetrics;
 
 import java.util.Properties;
 

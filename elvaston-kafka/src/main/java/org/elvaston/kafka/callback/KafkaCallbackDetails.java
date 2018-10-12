@@ -1,4 +1,4 @@
-package org.elvaston.kafka.common;
+package org.elvaston.kafka.callback;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
@@ -7,8 +7,8 @@ import org.apache.kafka.clients.producer.RecordMetadata;
  * Wrapper class to group the details returned from a Kafka call.
  */
 public class KafkaCallbackDetails<K, V> {
-    private ProducerRecord<K, V> producerRecord;
-    private RecordMetadata recordMetadata;
+    private final ProducerRecord<K, V> producerRecord;
+    private final RecordMetadata recordMetadata;
 
     KafkaCallbackDetails(ProducerRecord<K, V> producerRecord, RecordMetadata recordMetadata) {
         this.producerRecord = producerRecord;
@@ -22,7 +22,6 @@ public class KafkaCallbackDetails<K, V> {
     public V value() {
         return producerRecord.value();
     }
-
 
     public String topic() {
         return recordMetadata.topic();
