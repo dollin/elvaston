@@ -12,6 +12,7 @@ import org.elvaston.kafka.callback.KafkaCallbackImpl;
 import org.elvaston.kafka.common.KafkaPayload;
 import org.elvaston.kafka.common.KafkaUtils;
 import org.elvaston.kafka.metrics.KafkaMetrics;
+import org.elvaston.model.impl.TransactionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +62,7 @@ public class KafkaProducerImpl implements KafkaProducer<Long, KafkaPayload> {
         executorService.execute(kafkaMetrics);
 
         for (long index = 0; index < msgCount; index++) {
-            KafkaPayload payload = new KafkaPayload("This is record " + index);
+            KafkaPayload payload = new KafkaPayload("id_" + index, new TransactionImpl());
 
             ProducerRecord<Long, KafkaPayload> record = new ProducerRecord<>(TOPIC_NAME, index, payload);
             LOG.info("Sending record: [key: {}, topic: {}]", record.key(), record.topic());

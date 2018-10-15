@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * KafkaMetrics w/ common logic used by both Producer and Consumer.
+ * Abstract KafkaMetrics w/ common logic used by both Producer and Consumer.
  */
 public abstract class KafkaMetrics implements Runnable {
     private static final Logger LOG = LoggerFactory.getLogger(KafkaMetrics.class);

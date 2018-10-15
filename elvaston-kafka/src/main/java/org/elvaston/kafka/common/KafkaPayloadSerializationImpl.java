@@ -12,9 +12,13 @@ import java.util.Map;
  */
 public class KafkaPayloadSerializationImpl implements Serializer<KafkaPayload>, Deserializer<KafkaPayload> {
 
+    /**
+     * Noop as using commons utils so nothing to configure.
+     * @param configs not used as using apache commons
+     * @param isKey  not used as using apache commons
+     */
     @Override
     public void configure(Map configs, boolean isKey) {
-
     }
 
     @Override
@@ -27,8 +31,10 @@ public class KafkaPayloadSerializationImpl implements Serializer<KafkaPayload>, 
         return SerializationUtils.serialize(data);
     }
 
+    /**
+     * Noop as using commons utils so nothing to close.
+     */
     @Override
     public void close() {
-
     }
 }

@@ -34,7 +34,7 @@ public class KafkaConsumerImpl implements KafkaConsumer<Long, KafkaPayload> {
         KafkaConsumerImpl kafkaConsumer = new KafkaConsumerImpl();
         kafkaConsumer.start(new KafkaConsumerContext<>());
 
-        KafkaUtils.sleep(TimeUnit.SECONDS, 10);
+        KafkaUtils.sleep(TimeUnit.SECONDS, 30);
 
         kafkaConsumer.stop();
     }
