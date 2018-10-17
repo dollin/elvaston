@@ -2,6 +2,7 @@ package org.elvaston.kafka.metrics;
 
 import org.apache.kafka.common.Metric;
 import org.apache.kafka.common.MetricName;
+import org.elvaston.kafka.common.KafkaProperties;
 import org.elvaston.kafka.common.KafkaUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,11 +29,15 @@ public abstract class KafkaMetrics implements Runnable {
         running = false;
     }
 
+    /**
+     * While {@code running} is true then log the metrics every interval (in milliseconds)
+     * specified in the {@code KafkaProperties.METRICS_LOG_INTERVAL_IN_MS}
+     */
     @Override
     public void run() {
         while (running) {
             logMetrics();
-            KafkaUtils.sleep(TimeUnit.SECONDS, 10);
+            KafkaUtils.sleep(TimeUnit.MILLISECONDS, KafkaProperties.METRICS_LOG_INTERVAL_IN_MS);
         }
         logMetrics();
     }

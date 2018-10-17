@@ -23,7 +23,7 @@ public class KafkaProducerContext<K, V> {
         Properties props = new Properties();
 
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaProperties.KAFKA_BROKERS);
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, KafkaProperties.CLIENT_ID);
+        props.put(ProducerConfig.CLIENT_ID_CONFIG, KafkaProperties.KAFKA_CLIENT_ID);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, KafkaProperties.KEY_SERIALIZER);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaProperties.VALUE_SERIALIZER);
 
@@ -36,6 +36,11 @@ public class KafkaProducerContext<K, V> {
         return new KafkaProducer<>(props);
     }
 
+    /**
+     * To create metrics for the provided Producer.
+     * @param producer used to pass to the KafkaProducerMetrics constructor
+     * @return KafkaProducerMetrics
+     */
     public KafkaMetrics withMetrics(Producer<K, V> producer) {
         return new KafkaProducerMetrics<>(producer);
     }

@@ -1,7 +1,7 @@
 package org.elvaston.kafka.producer;
 
-import static org.elvaston.kafka.common.KafkaProperties.MESSAGE_COUNT;
-import static org.elvaston.kafka.common.KafkaProperties.TOPIC_NAME;
+import static org.elvaston.kafka.common.KafkaProperties.KAFKA_TOPIC_NAME;
+import static org.elvaston.kafka.common.KafkaProperties.PRODUCER_MESSAGE_COUNT;
 
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -12,7 +12,7 @@ import org.elvaston.kafka.callback.KafkaCallbackImpl;
 import org.elvaston.kafka.common.KafkaPayload;
 import org.elvaston.kafka.common.KafkaUtils;
 import org.elvaston.kafka.metrics.KafkaMetrics;
-import org.elvaston.model.impl.TransactionImpl;
+import org.elvaston.model.impl.TransactionBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +42,7 @@ public class KafkaProducerImpl implements KafkaProducer<Long, KafkaPayload> {
 
     @Override
     public void start() {
-        start(new KafkaProducerContext<>(), MESSAGE_COUNT);
+        start(new KafkaProducerContext<>(), PRODUCER_MESSAGE_COUNT);
     }
 
     @Override
@@ -62,9 +62,10 @@ public class KafkaProducerImpl implements KafkaProducer<Long, KafkaPayload> {
         executorService.execute(kafkaMetrics);
 
         for (long index = 0; index < msgCount; index++) {
-            KafkaPayload payload = new KafkaPayload("id_" + index, new TransactionImpl());
+            //TODO: GENERATE DATA
+            KafkaPayload payload = new KafkaPayload("id_" + index, new TransactionBuilder().build());
 
-            ProducerRecord<Long, KafkaPayload> record = new ProducerRecord<>(TOPIC_NAME, index, payload);
+            ProducerRecord<Long, KafkaPayload> record = new ProducerRecord<>(KAFKA_TOPIC_NAME, index, payload);
             LOG.info("Sending record: [key: {}, topic: {}]", record.key(), record.topic());
             producer.send(record, new KafkaCallbackImpl<>(record, this::onError, this::onSuccess));
         }
@@ -82,7 +83,6 @@ public class KafkaProducerImpl implements KafkaProducer<Long, KafkaPayload> {
     }
 
     private void onError(RecordMetadata metadata, Exception exception) {
-        //TODO: RETRY???? so will need to
         LOG.warn("Exception w/ topic: {}, partition: {}, offset: {}, keySize: {}, valueSize: {}",
                 metadata.topic(),
                 metadata.partition(),
