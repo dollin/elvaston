@@ -11,7 +11,6 @@ import java.util.Objects;
 public class TransactionBuilder {
 
     String id = null;
-    //TODO add a TradeDate
     String description = "";
     BigDecimal quantity = BigDecimal.ZERO;
     BigDecimal amount = BigDecimal.ZERO;
