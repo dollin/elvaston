@@ -5,11 +5,12 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
-import javax.json.JsonObject;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import javax.json.JsonObject;
 
 /**
  * Unit tests for creating a Transaction from the DefaultTransactionBuilder.
@@ -44,7 +45,8 @@ public class RandomTransactionBuilderTest {
     @Test
     public void buildWithRandomCurrency() {
         JsonObject json = new RandomTransactionBuilder().build().print(new JsonMedia()).json();
-        boolean matched = Arrays.stream(Currency.values()).anyMatch(currency -> currency == Currency.valueOf(json.getString("currency")));
+        boolean matched = Arrays.stream(Currency.values())
+                .anyMatch(currency -> currency == Currency.valueOf(json.getString("currency")));
         assertTrue("Checking " + json.getString("currency") + " is in the Currency enum", matched);
         assertNotEquals(Currency.NOT_SET.toString(), json.getString("currency"));
     }
@@ -52,7 +54,8 @@ public class RandomTransactionBuilderTest {
     @Test
     public void buildWithRandomSource() {
         JsonObject json = new RandomTransactionBuilder().build().print(new JsonMedia()).json();
-        boolean matched = Arrays.stream(Entity.values()).anyMatch(source -> source == Entity.valueOf(json.getString("source")));
+        boolean matched = Arrays.stream(Entity.values())
+                .anyMatch(source -> source == Entity.valueOf(json.getString("source")));
         assertTrue("Checking " + json.getString("source") + " is in the Entity enum", matched);
         assertNotEquals(Entity.NOT_SET.toString(), json.getString("source"));
     }
@@ -60,7 +63,8 @@ public class RandomTransactionBuilderTest {
     @Test
     public void buildWithRandomDestination() {
         JsonObject json = new RandomTransactionBuilder().build().print(new JsonMedia()).json();
-        boolean matched = Arrays.stream(Entity.values()).anyMatch(destination -> destination == Entity.valueOf(json.getString("destination")));
+        boolean matched = Arrays.stream(Entity.values())
+                .anyMatch(destination -> destination == Entity.valueOf(json.getString("destination")));
         assertTrue("Checking " + json.getString("destination") + " is in the Entity enum", matched);
         assertNotEquals(Entity.NOT_SET.toString(), json.getString("destination"));
     }
@@ -68,7 +72,8 @@ public class RandomTransactionBuilderTest {
     @Test
     public void buildWithRandomState() {
         JsonObject json = new RandomTransactionBuilder().build().print(new JsonMedia()).json();
-        boolean matched = Arrays.stream(State.values()).anyMatch(state -> state == State.valueOf(json.getString("state")));
+        boolean matched = Arrays.stream(State.values())
+                .anyMatch(state -> state == State.valueOf(json.getString("state")));
         assertTrue("Checking " + json.getString("state") + " is in the State enum", matched);
         assertNotEquals(State.NOT_SET.toString(), json.getString("state"));
     }

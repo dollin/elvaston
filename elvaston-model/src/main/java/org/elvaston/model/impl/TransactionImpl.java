@@ -6,9 +6,9 @@ import org.elvaston.model.api.Transaction;
 import java.math.BigDecimal;
 
 /**
- * TODO Add javadoc.
+ * Transaction impl for all movements between parties implements {@code Transaction}
+ * and used to send and receive over Kafka.
  */
-
 public class TransactionImpl implements Transaction {
 
     private String id;
@@ -41,6 +41,11 @@ public class TransactionImpl implements Transaction {
         this.created = created;
     }
 
+    /**
+     * Given a {@link Media} add the Transaction fields and return the enriched Media.
+     * @param media Media to use
+     * @return Media
+     */
     public Media print(Media media) {
         return media
                 .with("id", id)

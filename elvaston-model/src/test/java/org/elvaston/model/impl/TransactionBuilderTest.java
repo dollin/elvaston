@@ -1,10 +1,11 @@
 package org.elvaston.model.impl;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-import javax.json.JsonObject;
 import java.math.BigDecimal;
+import javax.json.JsonObject;
 
 /**
  * Unit tests for creating a Transaction from the TransactionBuilder.

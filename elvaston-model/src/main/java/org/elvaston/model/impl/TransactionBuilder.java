@@ -21,7 +21,11 @@ public class TransactionBuilder {
     State state = State.NOT_SET;
     long created = 0L;
 
-
+    /**
+     * Non null id to use.
+     * @param id to set on the builder
+     * @return TransactionBuilder
+     */
     public TransactionBuilder withId(String id) {
         if (Objects.nonNull(id)) {
             this.id = id;
@@ -29,6 +33,11 @@ public class TransactionBuilder {
         return this;
     }
 
+    /**
+     * Builder w/ description to use.
+     * @param description to set on the builder
+     * @return TransactionBuilder
+     */
     public TransactionBuilder withDescription(String description) {
         if (Objects.nonNull(description)) {
             this.description = description;
@@ -36,6 +45,11 @@ public class TransactionBuilder {
         return this;
     }
 
+    /**
+     * Builder w/ amount to use.
+     * @param amount to set on the builder
+     * @return TransactionBuilder
+     */
     public TransactionBuilder withAmount(BigDecimal amount) {
         if (Objects.nonNull(amount)) {
             this.amount = amount;
@@ -43,6 +57,11 @@ public class TransactionBuilder {
         return this;
     }
 
+    /**
+     * Builder w/ quantity to use.
+     * @param quantity to set on the builder
+     * @return TransactionBuilder
+     */
     public TransactionBuilder withQuantity(BigDecimal quantity) {
         if (Objects.nonNull(quantity)) {
             this.quantity = quantity;
@@ -50,6 +69,11 @@ public class TransactionBuilder {
         return this;
     }
 
+    /**
+     * Builder w/ currency {@link Currency} to use.
+     * @param currency to set on the builder
+     * @return TransactionBuilder
+     */
     public TransactionBuilder withCurrency(Currency currency) {
         if (Objects.nonNull(currency)) {
             this.currency = currency;
@@ -57,6 +81,11 @@ public class TransactionBuilder {
         return this;
     }
 
+    /**
+     * Builder w/ source {@link Entity} to use.
+     * @param source to set on the builder
+     * @return TransactionBuilder
+     */
     public TransactionBuilder withSource(Entity source) {
         if (Objects.nonNull(source)) {
             this.source = source;
@@ -64,6 +93,11 @@ public class TransactionBuilder {
         return this;
     }
 
+    /**
+     * Builder w/ stats {@link State} to use.
+     * @param state to set on the builder
+     * @return TransactionBuilder
+     */
     public TransactionBuilder withState(State state) {
         if (Objects.nonNull(state)) {
             this.state = state;
@@ -71,6 +105,11 @@ public class TransactionBuilder {
         return this;
     }
 
+    /**
+     * Builder w/ destination {@link Entity} to use.
+     * @param destination to set on the builder
+     * @return TransactionBuilder
+     */
     public TransactionBuilder withDestination(Entity destination) {
         if (Objects.nonNull(destination)) {
             this.destination = destination;
@@ -78,6 +117,11 @@ public class TransactionBuilder {
         return this;
     }
 
+    /**
+     * Builder w/ created time as a {@code long}.
+     * @param created to set on the builder
+     * @return TransactionBuilder
+     */
     public TransactionBuilder withCreated(long created) {
         if (created > 0L) {
             this.created = created;
