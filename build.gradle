@@ -8,17 +8,19 @@ sourceCompatibility = 1.8
 ext.gradleScriptDir = file('gradle')
 
 ext {
-    junitVersion = '4.12'
-    slf4jVersion = '1.7.4'
-    logbackVersion = '1.2.3'
-    log4j2Version = '2.8.2'
-    mapstructVersion = '1.1.0.Final'
-    mockitoVersion = '2.8.47'
     aeronVersion = '1.3.0'
     agronaVersion = '0.9.6'
-    kafkaVersion = '2.0.0'
-    commonsVersion = '3.8.1'
     chronicleVersion = '1.9.4'
+    commonsVersion = '3.8.1'
+    hamcrestVersion = '1.3'
+    jsonVersion = '1.1.3'
+    junitVersion = '4.12'
+    kafkaVersion = '2.0.0'
+    log4j2Version = '2.8.2'
+    logbackVersion = '1.2.3'
+    mapstructVersion = '1.1.0.Final'
+    mockitoVersion = '2.8.47'
+    slf4jVersion = '1.7.4'
 }
 
 subprojects {
@@ -83,6 +85,12 @@ project("elvaston-kafka") {
 
 project("elvaston-model") {
     description = "Elvaston Model Module"
+
+    dependencies {
+        compile "org.glassfish:javax.json:$jsonVersion"
+        testCompile "org.mockito:mockito-core:$mockitoVersion"
+        testCompile "org.hamcrest:hamcrest-all:$hamcrestVersion"
+    }
 
     ext {
         limits = [
