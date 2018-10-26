@@ -1,7 +1,7 @@
 package org.elvaston.model.impl;
 
 /**
- * TODO Add javadoc.
+ * Enum to represent the given Currency of a Transaction.
  */
 public enum Currency {
     NOT_SET, USD, EUR, GBP
