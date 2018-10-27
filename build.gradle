@@ -63,6 +63,36 @@ subprojects {
     }
 }
 
+project("elvaston-aeron") {
+    description = "Elvaston Aeron Module"
+
+    dependencies {
+        compile "io.aeron:aeron-all:$aeronVersion"
+        compile "org.agrona:agrona:$agronaVersion"
+        compile "net.openhft:chronicle-wire:$chronicleVersion"
+        testCompile "org.mockito:mockito-core:$mockitoVersion"
+    }
+
+    ext {
+        limits = [
+                'instruction': 75,
+                'branch': 5,
+                'line': 5,
+                'complexity': 75,
+                'method': 5,
+                'class': 5
+        ]
+    }
+}
+
+project("elvaston-euler") {
+    description = "Elvaston euler Module"
+}
+
+project("elvaston-incubating") {
+    description = "Elvaston Incubating Module"
+}
+
 project("elvaston-kafka") {
     description = "Elvaston Kafka Module"
 
@@ -102,32 +132,6 @@ project("elvaston-model") {
                 'class': 100
         ]
     }
-}
-
-project("elvaston-aeron") {
-    description = "Elvaston Aeron Module"
-
-    dependencies {
-        compile "io.aeron:aeron-all:$aeronVersion"
-        compile "org.agrona:agrona:$agronaVersion"
-        compile "net.openhft:chronicle-wire:$chronicleVersion"
-        testCompile "org.mockito:mockito-core:$mockitoVersion"
-    }
-
-    ext {
-        limits = [
-                'instruction': 75,
-                'branch': 5,
-                'line': 5,
-                'complexity': 75,
-                'method': 5,
-                'class': 5
-        ]
-    }
-}
-
-project("elvaston-euler") {
-    description = "Elvaston euler Module"
 }
 
 project("elvaston-selection") {

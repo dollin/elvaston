@@ -1,5 +1,6 @@
 include 'elvaston-aeron'
 include 'elvaston-euler'
-include 'elvaston-selection'
+include 'elvaston-incubating'
 include 'elvaston-kafka'
 include 'elvaston-model'
+include 'elvaston-selection'
