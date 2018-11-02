@@ -14,4 +14,6 @@ public interface Transaction extends Serializable {
      * @return Media
      */
     Media print(Media media);
+
+    boolean is(String id);
 }

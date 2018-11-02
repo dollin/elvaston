@@ -68,4 +68,9 @@ public class TransactionImpl implements Transaction {
                 media.json()
         );
     }
+
+    @Override
+    public boolean is(String id) {
+        return this.id.equals(id);
+    }
 }
