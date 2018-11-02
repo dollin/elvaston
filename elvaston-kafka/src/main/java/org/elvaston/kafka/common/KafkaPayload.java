@@ -9,11 +9,16 @@ import java.io.Serializable;
  */
 public class KafkaPayload implements Serializable {
     private String id;
+
     private Transaction transaction;
 
     public KafkaPayload(String id, Transaction transaction) {
         this.id = id;
         this.transaction = transaction;
+    }
+
+    public Transaction transaction() {
+        return transaction;
     }
 
     @Override

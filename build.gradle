@@ -98,9 +98,13 @@ project("elvaston-kafka") {
     description = "Elvaston Kafka Module"
 
     dependencies {
+        compile "io.vertx:vertx-core:$vertxVersion"
+        compile "io.vertx:vertx-web:$vertxVersion"
+        compile "io.vertx:vertx-web-client:$vertxVersion"
         compile "org.apache.kafka:kafka-clients:$kafkaVersion"
         compile "org.apache.commons:commons-lang3:$commonsVersion"
         compile project(":elvaston-model")
+        testCompile "io.vertx:vertx-unit:$vertxVersion"
     }
     ext {
         limits = [
