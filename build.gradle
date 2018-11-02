@@ -21,6 +21,7 @@ ext {
     mapstructVersion = '1.1.0.Final'
     mockitoVersion = '2.8.47'
     slf4jVersion = '1.7.4'
+    vertxVersion = '3.4.1'
 }
 
 subprojects {
