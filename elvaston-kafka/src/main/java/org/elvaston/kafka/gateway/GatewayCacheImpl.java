@@ -39,4 +39,6 @@ public class GatewayCacheImpl implements GatewayCache {
         queue.add(transaction);
         cache.put(transaction, ProcessorState.PENDING);
     }
+
+    //TODO: Need something to pop from the queue and process the messages
 }
